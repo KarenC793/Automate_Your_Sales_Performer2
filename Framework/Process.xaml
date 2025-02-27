@@ -1,0 +1,569 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Process" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(ui:QueueItem)" />
+    <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
+    <x:Property Name="in_PromptsTable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_DbConnection" Type="InArgument(ui:DatabaseConnection)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>818.4,454.4</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="50">
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Windows.Forms</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Activities.Runtime.Collections</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="80">
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.Windows.Forms</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="1358.2,7482" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="StrTimeMessageSent" />
+      <Variable x:TypeArguments="x:Boolean" Name="BooObtainedAnswer" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dtUserConversation" />
+      <Variable x:TypeArguments="x:String" Name="PhoneNumber" />
+      <Variable x:TypeArguments="x:String" Name="CountryCode" />
+      <Variable x:TypeArguments="x:String" Name="Status" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="598,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:MultipleAssign DisplayName="Multiple Assign get Phone number and country indicative from entire phone number" sap:VirtualizedContainerService.HintSize="598,179" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+      <ui:MultipleAssign.AssignOperations>
+        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[PhoneNumber]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("Phone").ToString.Trim.Substring(3)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
+            <ui:AssignOperation.To>
+              <OutArgument x:TypeArguments="x:String">[CountryCode]</OutArgument>
+            </ui:AssignOperation.To>
+            <ui:AssignOperation.Value>
+              <InArgument x:TypeArguments="x:String">[in_TransactionItem.SpecificContent("Phone").ToString.Trim.Substring(1,2)]</InArgument>
+            </ui:AssignOperation.Value>
+          </ui:AssignOperation>
+        </scg:List>
+      </ui:MultipleAssign.AssignOperations>
+    </ui:MultipleAssign>
+    <TryCatch DisplayName="Try Catch:  Get Customer Chat last message sent time and full conversation" sap:VirtualizedContainerService.HintSize="598,885" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+      <TryCatch.Try>
+        <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="429,405" sap2010:WorkflowViewState.IdRef="Sequence_19">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GetLastMessageSentToUser - Invoke Workflow File (WhatsApp\GetLastMessageSentToUser.xaml)" sap:VirtualizedContainerService.HintSize="395,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="WhatsApp\GetLastMessageSentToUser.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_DBConnection">[in_DbConnection]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Customer_id">[in_TransactionItem.SpecificContent("UserId").ToString.Trim]</InArgument>
+              <OutArgument x:TypeArguments="x:String" x:Key="out_StrListTimeMessageSent">[StrTimeMessageSent]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="GetUserMessages - Invoke Workflow File (GetUserMessages.xaml)" sap:VirtualizedContainerService.HintSize="395,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" UnSafe="False" WorkflowFileName="GetUserMessages.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_DBConnection">[in_DbConnection]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StrTimeMessageSent">[StrTimeMessageSent]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StrCustomerId">[in_TransactionItem.SpecificContent("UserId").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_User_Tel_Number">[PhoneNumber]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_CountryCode">[CountryCode]</InArgument>
+              <OutArgument x:TypeArguments="x:Boolean" x:Key="out_BooObtainedAnswer">[BooObtainedAnswer]</OutArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtUserConversation">[dtUserConversation]</OutArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StrWhatsAppHeaderMessage">[in_Config("StrWhatsAppHeaderMessage").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StrSendMessageURL">[String.Format(in_Config("StrWhasAppSendMessageURL").toString,CountryCode,PhoneNumber)]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_GetUserMessagesSPName">[in_Config("GetWhatsAppUserMessagesSPName").ToString]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="InsertWhatsAppMessageSPName">[in_Config("InsertWhatsAppMessageSPName").ToString]</InArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="429,281" sap2010:WorkflowViewState.IdRef="Sequence_17">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <ui:LogMessage DisplayName="Log Message get WhatsAPP messages error" sap:VirtualizedContainerService.HintSize="395,173" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Error" Message="[&quot;Unexpected error getting last WhatsApp message sent time and customer full chat: &quot; +  exception.Message + &quot;. At: &quot; +  exception.Source]" />
+              <Rethrow DisplayName="Rethrow get WhatsAPP messages" sap:VirtualizedContainerService.HintSize="395,48" sap2010:WorkflowViewState.IdRef="Rethrow_1" />
+            </Sequence>
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+      <TryCatch.Finally>
+        <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="429,25" sap2010:WorkflowViewState.IdRef="Sequence_18">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </TryCatch.Finally>
+    </TryCatch>
+    <If Condition="[BooObtainedAnswer]" DisplayName="If Customer has already responded" sap:VirtualizedContainerService.HintSize="598,6150" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="596,5744" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch DisplayName="Try Catch Send Chat GPT prompt for user message" sap:VirtualizedContainerService.HintSize="562,708" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Sequence DisplayName="Try" sap:VirtualizedContainerService.HintSize="416,228" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="SendPrompt - Invoke Workflow File (ChatGPT\SendPrompt.xaml)" sap:VirtualizedContainerService.HintSize="382,168" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ChatGPT\SendPrompt.xaml">
+                  <ui:InvokeWorkflowFile.Arguments>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_CustomerStatus">[in_TransactionItem.SpecificContent("Status").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_CustomerName">[in_TransactionItem.SpecificContent("Name").ToString]</InArgument>
+                    <OutArgument x:TypeArguments="x:String" x:Key="out_Status">[Status]</OutArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="in_dtUserConversation">[dtUserConversation]</InArgument>
+                    <InArgument x:TypeArguments="sd:DataTable" x:Key="in_PromptsTable">[in_PromptsTable]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ChatGPTEndpoint">[in_Config("ChatGPTEndpoint").ToString]</InArgument>
+                    <InArgument x:TypeArguments="x:String" x:Key="in_ChatPGTCredentialName">[in_Config("ChatGPTToken").ToString]</InArgument>
+                  </ui:InvokeWorkflowFile.Arguments>
+                </ui:InvokeWorkflowFile>
+              </Sequence>
+            </TryCatch.Try>
+            <TryCatch.Catches>
+              <Catch x:TypeArguments="s:Exception" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+                <ActivityAction x:TypeArguments="s:Exception">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="ChatGPT send promt error" sap:VirtualizedContainerService.HintSize="416,281" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:LogMessage DisplayName="Log Message Send ChatGPT error" sap:VirtualizedContainerService.HintSize="382,173" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Error sending ChatGPT prompt: &quot; + exception.Message + &quot;. At: &quot; + exception.Source]" />
+                    <Rethrow DisplayName="Rethrow Send ChatGPT prompt error" sap:VirtualizedContainerService.HintSize="382,48" sap2010:WorkflowViewState.IdRef="Rethrow_2" />
+                  </Sequence>
+                </ActivityAction>
+              </Catch>
+            </TryCatch.Catches>
+            <TryCatch.Finally>
+              <Sequence DisplayName="Finally" sap:VirtualizedContainerService.HintSize="416,25" sap2010:WorkflowViewState.IdRef="Sequence_21">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+              </Sequence>
+            </TryCatch.Finally>
+          </TryCatch>
+          <If Condition="[Status.Trim.ToUpper.Contains(in_TransactionItem.SpecificContent(&quot;Status&quot;).ToString.ToUpper.Trim)]" DisplayName="If ChatGPT status response contains the current customer status" sap:VirtualizedContainerService.HintSize="562,4976" sap2010:WorkflowViewState.IdRef="If_2">
+            <If.Then>
+              <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="560,277" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1 to follow up with customer" sap:VirtualizedContainerService.HintSize="526,217" sap2010:WorkflowViewState.IdRef="AddQueueItem_9" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                  <ui:AddQueueItem.ItemInformation>
+                    <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                  </ui:AddQueueItem.ItemInformation>
+                </ui:AddQueueItem>
+              </Sequence>
+            </If.Then>
+            <If.Else>
+              <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="560,4570" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Switch x:TypeArguments="x:String" DisplayName="Switch ChatGPT response status " Expression="[If(Status.ToUpper.Contains(&quot;QUALIFIED&quot;),&quot;Qualified&quot;,&#xA;If(Status.ToUpper.Contains(&quot;PROPOSAL SENT&quot;),&quot;Proposal Sent&quot;,&#xA;If(Status.ToUpper.Contains(&quot;NOT INTEREST&quot;),&quot;Closed - Not interest&quot;,&#xA;If(Status.ToUpper.Contains(&quot;SCHEDULED&quot;),&quot;Scheduled&quot;,&#xA;If(Status.ToUpper.Contains(&quot;CLOSED - WON&quot;),&quot;Closed - Won&quot;,&#xA;If(Status.ToUpper.Contains(&quot;NO RESPONSE&quot;),&quot;No Response&quot;,&quot;&quot;))))))]" sap:VirtualizedContainerService.HintSize="526,4510" sap2010:WorkflowViewState.IdRef="Switch`1_2">
+                  <Switch.Default>
+                    <Sequence DisplayName="Default" sap:VirtualizedContainerService.HintSize="524,90" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                      <sap:WorkflowViewStateService.ViewState>
+                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        </scg:Dictionary>
+                      </sap:WorkflowViewStateService.ViewState>
+                    </Sequence>
+                  </Switch.Default>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Sequence x:Key="Qualified" sap2010:Annotation.AnnotationText="If ChatGPT analyzed status is Qualified, update status in HubSpot and create queue for performer 1 to send customer message" DisplayName="Body" sap:VirtualizedContainerService.HintSize="524,610" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateCustomerStatus - Invoke Workflow File (HubSpot\UpdateCustomerStatus.xaml)" sap:VirtualizedContainerService.HintSize="480.8,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="HubSpot\UpdateCustomerStatus.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerHubSpotId">[in_TransactionItem.SpecificContent("HubSpotContactId").ToString.Trim]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerNewStatus">Qualified</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubsPotTokenCredentialName">[in_Config("HubSpotCredentialName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubspotEndpointUrlUpdateCustomer">[in_Config("HubSpotAPIEndpointCustomerUpdate").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Qualified status to transaction item" sap:VirtualizedContainerService.HintSize="480.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("Status")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["Qualified"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1" sap:VirtualizedContainerService.HintSize="480.8,217.6" sap2010:WorkflowViewState.IdRef="AddQueueItem_2" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                  <Sequence x:Key="Closed - Not interest" sap2010:Annotation.AnnotationText="If ChatGPT analyzed status is Closed - Not Interest, update status in HubSpot and create queue for performer 1 to send customer message" DisplayName="Body" sap:VirtualizedContainerService.HintSize="514.4,611.2" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateCustomerStatus - Invoke Workflow File (HubSpot\UpdateCustomerStatus.xaml)" sap:VirtualizedContainerService.HintSize="480.8,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_7" UnSafe="False" WorkflowFileName="HubSpot\UpdateCustomerStatus.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerHubSpotId">[in_TransactionItem.SpecificContent("HubSpotContactId").ToString.Trim]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerNewStatus">Closed - Not interest</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubsPotTokenCredentialName">[in_Config("HubSpotCredentialName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubspotEndpointUrlUpdateCustomer">[in_Config("HubSpotAPIEndpointCustomerUpdate").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Qualified status to transaction item" sap:VirtualizedContainerService.HintSize="480.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_3">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("Status")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["Closed - Not interest"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1" sap:VirtualizedContainerService.HintSize="480.8,217.6" sap2010:WorkflowViewState.IdRef="AddQueueItem_6" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                  <Sequence x:Key="Scheduled" sap2010:Annotation.AnnotationText="If ChatGPT analyzed status is Scheduled, update status in HubSpot and create queue for performer 1 to send customer message" DisplayName="Body" sap:VirtualizedContainerService.HintSize="514.4,611.2" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateCustomerStatus - Invoke Workflow File (HubSpot\UpdateCustomerStatus.xaml)" sap:VirtualizedContainerService.HintSize="480.8,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_8" UnSafe="False" WorkflowFileName="HubSpot\UpdateCustomerStatus.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerHubSpotId">[in_TransactionItem.SpecificContent("HubSpotContactId").ToString.Trim]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerNewStatus">Scheduled</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubsPotTokenCredentialName">[in_Config("HubSpotCredentialName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubspotEndpointUrlUpdateCustomer">[in_Config("HubSpotAPIEndpointCustomerUpdate").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Qualified status to transaction item" sap:VirtualizedContainerService.HintSize="480.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("Status")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["Scheduled"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1" sap:VirtualizedContainerService.HintSize="480.8,217.6" sap2010:WorkflowViewState.IdRef="AddQueueItem_7" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                  <Sequence x:Key="Closed - Won" sap2010:Annotation.AnnotationText="If ChatGPT analyzed status is Closed - Won, update status in HubSpot and create queue for performer 1 to send customer message" DisplayName="Body" sap:VirtualizedContainerService.HintSize="524,610" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateCustomerStatus - Invoke Workflow File (HubSpot\UpdateCustomerStatus.xaml)" sap:VirtualizedContainerService.HintSize="480.8,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_9" UnSafe="False" WorkflowFileName="HubSpot\UpdateCustomerStatus.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerHubSpotId">[in_TransactionItem.SpecificContent("HubSpotContactId").ToString.Trim]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerNewStatus">Closed - Won</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubsPotTokenCredentialName">[in_Config("HubSpotCredentialName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubspotEndpointUrlUpdateCustomer">[in_Config("HubSpotAPIEndpointCustomerUpdate").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Qualified status to transaction item" sap:VirtualizedContainerService.HintSize="480.8,113.6" sap2010:WorkflowViewState.IdRef="Assign_5">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("Status")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["Closed - Won"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1" sap:VirtualizedContainerService.HintSize="480.8,217.6" sap2010:WorkflowViewState.IdRef="AddQueueItem_8" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                  <Sequence x:Key="Proposal Sent" sap2010:Annotation.AnnotationText="If ChatGPT analyzed status is Proposal Sent, update status in HubSpot, extract customer quote information from ChatGPT message and create performer 1 queue item" DisplayName="Body" sap:VirtualizedContainerService.HintSize="524,971" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateCustomerStatus - Invoke Workflow File (HubSpot\UpdateCustomerStatus.xaml)" sap:VirtualizedContainerService.HintSize="480.8,176" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_13" UnSafe="False" WorkflowFileName="HubSpot\UpdateCustomerStatus.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerHubSpotId">[in_TransactionItem.SpecificContent("HubSpotContactId").ToString.Trim]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerNewStatus">Proposal Sent</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubsPotTokenCredentialName">[in_Config("HubSpotCredentialName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubspotEndpointUrlUpdateCustomer">[in_Config("HubSpotAPIEndpointCustomerUpdate").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="490,173" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[Status.Split({vbCr, vbLf, vbCrLf}, StringSplitOptions.RemoveEmptyEntries)(0)]" />
+                    <ui:MultipleAssign DisplayName="Multiple Assign extract customer data for quotation from ChatGPT message" sap:VirtualizedContainerService.HintSize="490,303" sap2010:WorkflowViewState.IdRef="MultipleAssign_4">
+                      <ui:MultipleAssign.AssignOperations>
+                        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("Status")]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:Object">["Proposal Sent"]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("CountryOfOrigin")]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:Object">[Status.Split({vbCr, vbLf, vbCrLf}, StringSplitOptions.RemoveEmptyEntries).First(Function(x) x.ToUpper.Contains("COUNTRY OF ORIGIN")).Split(":")(1).Trim]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_5">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("TravelStartDate")]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:Object">[Status.Split({vbCr, vbLf, vbCrLf}, StringSplitOptions.RemoveEmptyEntries).First(Function(x) x.ToUpper.Contains("TRAVEL START DATE")).Split(":")(1).Trim]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_6">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("TravelEndDate")]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:Object">[Status.Split({vbCr, vbLf, vbCrLf}, StringSplitOptions.RemoveEmptyEntries).First(Function(x) x.ToUpper.Contains("TRAVEL END DATE")).Split(":")(1).Trim]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_7">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("CountryOfDestiny")]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:Object">[Status.Split({vbCr, vbLf, vbCrLf}, StringSplitOptions.RemoveEmptyEntries).First(Function(x) x.ToUpper.Contains("COUNTRY YOU ARE TRAVELING TO")).Split(":")(1).Trim]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
+                            <ui:AssignOperation.To>
+                              <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("NumberOfTravelers")]</OutArgument>
+                            </ui:AssignOperation.To>
+                            <ui:AssignOperation.Value>
+                              <InArgument x:TypeArguments="x:Object">[Status.Split({vbCr, vbLf, vbCrLf}, StringSplitOptions.RemoveEmptyEntries).First(Function(x) x.ToUpper.Contains("NUMBER OF TRAVELERS")).Split(":")(1).Trim]</InArgument>
+                            </ui:AssignOperation.Value>
+                          </ui:AssignOperation>
+                        </scg:List>
+                      </ui:MultipleAssign.AssignOperations>
+                    </ui:MultipleAssign>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1" sap:VirtualizedContainerService.HintSize="490,217" sap2010:WorkflowViewState.IdRef="AddQueueItem_12" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                  <Sequence x:Key="No Response" sap2010:Annotation.AnnotationText="If ChatGPT analyzed status is No Response, update status in HubSpot and create queue for performer 1 to send customer message" DisplayName="Body" sap:VirtualizedContainerService.HintSize="524,610" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="UpdateCustomerStatus - Invoke Workflow File (HubSpot\UpdateCustomerStatus.xaml)" sap:VirtualizedContainerService.HintSize="490,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_14" UnSafe="False" WorkflowFileName="HubSpot\UpdateCustomerStatus.xaml">
+                      <ui:InvokeWorkflowFile.Arguments>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerHubSpotId">[in_TransactionItem.SpecificContent("HubSpotContactId").ToString.Trim]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_CustomerNewStatus">No Response</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubsPotTokenCredentialName">[in_Config("HubSpotCredentialName").ToString]</InArgument>
+                        <InArgument x:TypeArguments="x:String" x:Key="in_HubspotEndpointUrlUpdateCustomer">[in_Config("HubSpotAPIEndpointCustomerUpdate").ToString]</InArgument>
+                      </ui:InvokeWorkflowFile.Arguments>
+                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Qualified status to transaction item" sap:VirtualizedContainerService.HintSize="490,114" sap2010:WorkflowViewState.IdRef="Assign_6">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:Object">[in_TransactionItem.SpecificContent("Status")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:Object">["No Response"]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DisplayName="Add Queue Item for performer 1" sap:VirtualizedContainerService.HintSize="490,217" sap2010:WorkflowViewState.IdRef="AddQueueItem_13" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;Performer1QueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+                      <ui:AddQueueItem.ItemInformation>
+                        <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+                      </ui:AddQueueItem.ItemInformation>
+                    </ui:AddQueueItem>
+                  </Sequence>
+                </Switch>
+              </Sequence>
+            </If.Else>
+          </If>
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="596,277" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:AddQueueItem ServiceBaseAddress="{x:Null}" TimeoutMS="{x:Null}" DeferDate="[Now.AddMinutes(10)]" DisplayName="Add Queue Item" sap:VirtualizedContainerService.HintSize="562,217" sap2010:WorkflowViewState.IdRef="AddQueueItem_1" ItemInformationCollection="[in_TransactionItem.SpecificContent]" Priority="Normal" QueueType="[in_Config(&quot;OrchestratorQueueName&quot;).ToString]" Reference="[in_TransactionItem.Reference]">
+            <ui:AddQueueItem.ItemInformation>
+              <scg:Dictionary x:TypeArguments="x:String, InArgument" />
+            </ui:AddQueueItem.ItemInformation>
+          </ui:AddQueueItem>
+        </Sequence>
+      </If.Else>
+    </If>
+  </Sequence>
+</Activity>
