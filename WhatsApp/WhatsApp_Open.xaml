@@ -1,0 +1,174 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="WhatsApp_Open" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_StrWhatsAppURL" Type="InArgument(x:String)" />
+  </x:Members>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>WhatsApp_Open_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Models</x:String>
+      <x:String>UiPath.UIAutomationNext.Contracts</x:String>
+      <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities.Services.RuntimeAnalyze</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.Platform.SyncObjects</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Mail.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="WhatsApp_Open" sap:VirtualizedContainerService.HintSize="1452.0000000000002,1462.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message init" sap:VirtualizedContainerService.HintSize="604,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started WhasApp_Open workflow&quot;]" />
+    <ui:RetryScope sap2010:Annotation.AnnotationText="Opens whatsapp on Chrome" DisplayName="Retry Scope - open whatsapp" sap:VirtualizedContainerService.HintSize="604,1100.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="2" RetryInterval="00:00:15">
+      <ui:RetryScope.ActivityBody>
+        <ActivityAction>
+          <Sequence DisplayName="Action" sap:VirtualizedContainerService.HintSize="560,861.6" sap2010:WorkflowViewState.IdRef="Sequence_5">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:KillProcess ContinueOnError="{x:Null}" Process="{x:Null}" AppliesTo="OnlyCurrentUser" DisplayName="Kill Process Chrome" sap:VirtualizedContainerService.HintSize="526.4,166.4" sap2010:WorkflowViewState.IdRef="KillProcess_1" ProcessName="Chrome" />
+            <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Chrome: WhatsApp" sap:VirtualizedContainerService.HintSize="526.4,635.2" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="fb9bd075-accc-402c-bd6a-d5e99596d4b8" Version="V2">
+              <uix:NApplicationCard.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
+                  </ActivityAction.Argument>
+                  <uix:NCheckState DisplayName="Check App State search chats" EnableIfExists="False" sap:VirtualizedContainerService.HintSize="492.8,395.2" sap2010:WorkflowViewState.IdRef="NCheckState_1" ScopeIdentifier="fb9bd075-accc-402c-bd6a-d5e99596d4b8" Timeout="30" Version="V4">
+                    <uix:NCheckState.IfNotExists>
+                      <Sequence DisplayName="Target does not appear" sap:VirtualizedContainerService.HintSize="450,177" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <Throw DisplayName="Throw - could not open whatsapp" Exception="[new Exception(&quot;Could not open WhatsApp&quot;)]" sap:VirtualizedContainerService.HintSize="416,115" sap2010:WorkflowViewState.IdRef="Throw_1" />
+                      </Sequence>
+                    </uix:NCheckState.IfNotExists>
+                    <uix:NCheckState.Target>
+                      <uix:TargetAnchorable BrowserURL="web.whatsapp.com" DesignTimeRectangle="8, 147, 1920, 893" DesignTimeScaleFactor="1" ElementType="InputBox" FullSelectorArgument="&lt;webctrl parentid='app' tag='DIV' visibleinnertext='Chat*Search*' /&gt;" Guid="5dcde5d4-ed92-421f-a3f0-5b34813db5cb" InformativeScreenshot="3933c23ac581d35703313dd39352727b.png" ScopeSelectorArgument="&lt;html app='chrome.exe' title='*WhatsApp*' /&gt;" SearchSteps="Selector" Version="V4" Visibility="Interactive" />
+                    </uix:NCheckState.Target>
+                  </uix:NCheckState>
+                </ActivityAction>
+              </uix:NApplicationCard.Body>
+              <uix:NApplicationCard.TargetApp>
+                <uix:TargetApp Area="-8, -8, 1936, 1048" BrowserType="Chrome" IconBase64="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" sap2010:WorkflowViewState.IdRef="TargetApp_1" InformativeScreenshot="e93605b947f3a24360abd4c82dc7a939.png" Selector="&lt;html app='chrome.exe' url='https://web.whatsapp.com/' /&gt;" Title="*WhatsApp*" Url="[in_StrWhatsAppURL]" />
+              </uix:NApplicationCard.TargetApp>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </uix:NApplicationCard>
+          </Sequence>
+        </ActivityAction>
+      </ui:RetryScope.ActivityBody>
+      <ui:RetryScope.Condition>
+        <ActivityFunc x:TypeArguments="x:Boolean" />
+      </ui:RetryScope.Condition>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:RetryScope>
+    <ui:LogMessage DisplayName="Log Message end" sap:VirtualizedContainerService.HintSize="604,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Ended WhasApp_Open workflow&quot;]" />
+  </Sequence>
+</Activity>

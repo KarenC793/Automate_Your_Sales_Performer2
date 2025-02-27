@@ -1,0 +1,267 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="SendPrompt" this:SendPrompt.in_CustomerStatus="First Contact" this:SendPrompt.in_CustomerName="Karen" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ss="clr-namespace:System.Security;assembly=System.Private.CoreLib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_CustomerStatus" Type="InArgument(x:String)" />
+    <x:Property Name="in_CustomerName" Type="InArgument(x:String)" />
+    <x:Property Name="out_Status" Type="OutArgument(x:String)" />
+    <x:Property Name="in_dtUserConversation" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_PromptsTable" Type="InArgument(sd:DataTable)" />
+    <x:Property Name="in_ChatGPTEndpoint" Type="InArgument(x:String)" />
+    <x:Property Name="in_ChatPGTCredentialName" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:SendPrompt.in_ChatGPTEndpoint>
+    <InArgument x:TypeArguments="x:String" />
+  </this:SendPrompt.in_ChatGPTEndpoint>
+  <this:SendPrompt.in_ChatPGTCredentialName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:SendPrompt.in_ChatPGTCredentialName>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>SendPrompt_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>UiPath.Web</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Web.Activities</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Text.RegularExpressions</x:String>
+      <x:String>Newtonsoft.Json.Linq</x:String>
+      <x:String>Newtonsoft.Json</x:String>
+      <x:String>System.Dynamic</x:String>
+      <x:String>System.Collections.Specialized</x:String>
+      <x:String>UiPath.DataTableUtilities</x:String>
+      <x:String>UiPath.Platform</x:String>
+      <x:String>System.Numerics</x:String>
+      <x:String>System.Net</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.Web</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
+      <AssemblyReference>System.CodeDom</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Forms</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic.Core</AssemblyReference>
+      <AssemblyReference>System.Text.RegularExpressions</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>Newtonsoft.Json</AssemblyReference>
+      <AssemblyReference>System.Collections.Specialized</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>UiPath.CodedWorkflows</AssemblyReference>
+      <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>System.Net.Primitives</AssemblyReference>
+      <AssemblyReference>System.Net.HttpListener</AssemblyReference>
+      <AssemblyReference>System.Net.WebProxy</AssemblyReference>
+      <AssemblyReference>System.Net.NameResolution</AssemblyReference>
+      <AssemblyReference>System.Net.WebClient</AssemblyReference>
+      <AssemblyReference>System.Net.Requests</AssemblyReference>
+      <AssemblyReference>System.Net.ServicePoint</AssemblyReference>
+      <AssemblyReference>System.Net.WebHeaderCollection</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Get respective promt from prompt SQl table depeding on the customer status, then replace user name and conversation and send the promt to ChatGPT API. Extract ChatGPT response" DisplayName="SendPrompt" sap:VirtualizedContainerService.HintSize="1452.0000000000002,2076.8" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="x:String" Name="ResponseContent">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">HttpClient_1</x:String>
+            <x:String x:Key="SourcePropertyName">Result</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+      <Variable x:TypeArguments="x:Int32" Name="ResponseStatus">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">HttpClient_1</x:String>
+            <x:String x:Key="SourcePropertyName">StatusCode</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+      <Variable x:TypeArguments="x:String" Name="Prompt" />
+      <Variable x:TypeArguments="njl:JObject" Name="ChatGPTResponse" />
+      <Variable x:TypeArguments="x:String" Name="Conversation" />
+      <Variable x:TypeArguments="ss:SecureString" Name="ChatGPTToken" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message workflow started" sap:VirtualizedContainerService.HintSize="470.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Send ChatGPT prompt workflow started&quot;]" />
+    <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[in_dtUserConversation]" DisplayName="For Each Row Customer conversation table" sap:VirtualizedContainerService.HintSize="470.4,346.4" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+      <ui:ForEachRow.Body>
+        <ActivityAction x:TypeArguments="sd:DataRow">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <Assign DisplayName="Assign Add current message to conversation variable" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_5">
+              <Assign.To>
+                <OutArgument x:TypeArguments="x:String">[Conversation]</OutArgument>
+              </Assign.To>
+              <Assign.Value>
+                <InArgument x:TypeArguments="x:String">[Conversation + CurrentRow("Message_Sender").ToString + ":" + CurrentRow("Message_Text").ToString + "\n"]</InArgument>
+              </Assign.Value>
+            </Assign>
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEachRow.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:ForEachRow>
+    <Assign DisplayName="Assign Build ChatGPT prompt replacing customer conversation" sap:VirtualizedContainerService.HintSize="470.4,113.6" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[Prompt]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[System.Text.RegularExpressions.Regex.Replace( in_PromptsTable.AsEnumerable.First(Function(row) row("User_Status").ToString.Trim.Equals(in_CustomerStatus))("User_Prompt_Response").ToString.Replace("{1}", Conversation).Trim,"\r?\n",".").Replace(vbCrLf, ".").Replace(Environment.NewLine, ".")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" Username="{x:Null}" AssetName="[in_ChatPGTCredentialName]" CacheStrategy="None" DisplayName="Get Credential ChatGPT token" sap:VirtualizedContainerService.HintSize="470.4,175.2" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[ChatGPTToken]" />
+    <ui:HttpClient ClientCertificate="{x:Null}" ClientCertificatePassword="{x:Null}" ConsumerKey="{x:Null}" ConsumerSecret="{x:Null}" ContinueOnError="{x:Null}" FileAttachments="{x:Null}" OAuth1Token="{x:Null}" OAuth1TokenSecret="{x:Null}" OAuth2Token="{x:Null}" Password="{x:Null}" ResourcePath="{x:Null}" ResponseAttachment="{x:Null}" ResponseHeaders="{x:Null}" SecureClientCertificatePassword="{x:Null}" SecurePassword="{x:Null}" Username="{x:Null}" AcceptFormat="JSON" AuthenticationType="None" Body="[&quot;{&quot;&quot;model&quot;&quot;: &quot;&quot;gpt-4o-mini&quot;&quot;, &quot;&quot;store&quot;&quot;: false, &quot;&quot;messages&quot;&quot;: [{&quot;&quot;role&quot;&quot;: &quot;&quot;user&quot;&quot;, &quot;&quot;content&quot;&quot;: &quot;&quot;&quot;+Prompt+&quot;&quot;&quot;}]}&quot;]" BodyFormat="application/xml" DisplayName="HTTP Request Send ChatGPT API prompt " EnableSSLVerification="True" EndPoint="[in_ChatGPTEndpoint]" sap:VirtualizedContainerService.HintSize="470.4,103.2" sap2010:WorkflowViewState.IdRef="HttpClient_1" Method="POST" Result="[ResponseContent]" StatusCode="[ResponseStatus]" TimeoutMS="160000">
+      <ui:HttpClient.Attachments>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.Attachments>
+      <ui:HttpClient.Cookies>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.Cookies>
+      <ui:HttpClient.Headers>
+        <InArgument x:TypeArguments="x:String" x:Key="Content-Type">application/json</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="Authorization">["Bearer " + new System.Net.NetworkCredential(string.Empty, ChatGPTToken).Password]</InArgument>
+      </ui:HttpClient.Headers>
+      <ui:HttpClient.Parameters>
+        <InArgument x:TypeArguments="x:String" x:Key="Parameters">POST</InArgument>
+      </ui:HttpClient.Parameters>
+      <ui:HttpClient.UrlSegments>
+        <scg:Dictionary x:TypeArguments="x:String, InArgument(x:String)" />
+      </ui:HttpClient.UrlSegments>
+    </ui:HttpClient>
+    <If Condition="[ResponseStatus = 200]" DisplayName="If ChatGPT API request result is 200" sap:VirtualizedContainerService.HintSize="470.4,537.6" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,225.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message ChatGPT api request success" sap:VirtualizedContainerService.HintSize="382.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Message="[&quot;ChatGPT HTTP request was successful&quot;]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,173.6" sap2010:WorkflowViewState.IdRef="Sequence_8">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <Throw DisplayName="Throw ChatGPT request failed" Exception="[New Exception(&quot;ChatGPT HTTP request failed: &quot; + responseContent)]" sap:VirtualizedContainerService.HintSize="382.4,113.6" sap2010:WorkflowViewState.IdRef="Throw_1" />
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" JsonSample="{x:Null}" DisplayName="Deserialize ChatGPT API JSON  response" sap:VirtualizedContainerService.HintSize="470,122" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[ChatGPTResponse]" JsonString="[responseContent]" />
+    <Assign DisplayName="Assign Get ChatGPT status message" sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_2">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_status]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[ChatGPTResponse("choices")(0)("message")("content").ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="470,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;ChatGPT generated message: &quot; +vbCrLf + ChatGPTResponse(&quot;choices&quot;)(0)(&quot;message&quot;)(&quot;content&quot;).ToString]" />
+    <ui:LogMessage DisplayName="Log Message workflow finished" sap:VirtualizedContainerService.HintSize="470,164" sap2010:WorkflowViewState.IdRef="LogMessage_4" Message="[&quot;Send ChatGPT prompt workflow finished&quot;]" />
+  </Sequence>
+</Activity>

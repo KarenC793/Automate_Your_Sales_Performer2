@@ -1,0 +1,185 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="Sequence4" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_DBConnection" Type="InArgument(ui:DatabaseConnection)" />
+    <x:Property Name="in_StrTimeMessageSent" Type="InArgument(x:String)" />
+    <x:Property Name="in_StrCustomerId" Type="InArgument(x:String)" />
+    <x:Property Name="in_User_Tel_Number" Type="InArgument(x:String)" />
+    <x:Property Name="in_CountryCode" Type="InArgument(x:String)" />
+    <x:Property Name="out_BooObtainedAnswer" Type="OutArgument(x:Boolean)" />
+    <x:Property Name="out_dtUserConversation" Type="OutArgument(sd:DataTable)" />
+    <x:Property Name="in_StrWhatsAppHeaderMessage" Type="InArgument(x:String)" />
+    <x:Property Name="in_StrSendMessageURL" Type="InArgument(x:String)" />
+    <x:Property Name="in_GetUserMessagesSPName" Type="InArgument(x:String)" />
+    <x:Property Name="InsertWhatsAppMessageSPName" Type="InArgument(x:String)" />
+  </x:Members>
+  <this:Sequence4.in_GetUserMessagesSPName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Sequence4.in_GetUserMessagesSPName>
+  <this:Sequence4.InsertWhatsAppMessageSPName>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Sequence4.InsertWhatsAppMessageSPName>
+  <VisualBasic.Settings>
+    <x:Null />
+  </VisualBasic.Settings>
+  <sap2010:WorkflowViewState.IdRef>Sequence4_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <sco:Collection x:TypeArguments="x:String">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>GlobalVariablesNamespace</x:String>
+      <x:String>GlobalConstantsNamespace</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Security</x:String>
+      <x:String>UiPath.Database</x:String>
+      <x:String>UiPath.Database.Activities</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+    </sco:Collection>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <sco:Collection x:TypeArguments="AssemblyReference">
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.ComponentModel</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.EventBasedAsync</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Primitives</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.TypeConverter</AssemblyReference>
+      <AssemblyReference>System.Configuration.ConfigurationManager</AssemblyReference>
+      <AssemblyReference>System.Console</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.Common</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System.Data.SqlClient</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Drawing.Common</AssemblyReference>
+      <AssemblyReference>System.Drawing.Primitives</AssemblyReference>
+      <AssemblyReference>System.Linq</AssemblyReference>
+      <AssemblyReference>System.Linq.Async</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Memory.Data</AssemblyReference>
+      <AssemblyReference>System.Net.Mail</AssemblyReference>
+      <AssemblyReference>System.ObjectModel</AssemblyReference>
+      <AssemblyReference>System.Private.CoreLib</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Private.Uri</AssemblyReference>
+      <AssemblyReference>System.Private.Xml</AssemblyReference>
+      <AssemblyReference>System.Reflection.DispatchProxy</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Reflection.TypeExtensions</AssemblyReference>
+      <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
+      <AssemblyReference>System.Security.Permissions</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>UiPath.Database</AssemblyReference>
+      <AssemblyReference>UiPath.Database.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Studio.Constants</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Workflow</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+    </sco:Collection>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence sap2010:Annotation.AnnotationText="Validates if new messages obtained for an specific customer and in case it is, saves new messages on DB&#xA;" DisplayName="Sequence4" sap:VirtualizedContainerService.HintSize="1358.2,1446" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message init" sap:VirtualizedContainerService.HintSize="418,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started GetUserMessages workflow&quot;]" />
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke WhatsAppOpenUserConversation workflow" sap:VirtualizedContainerService.HintSize="418,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" UnSafe="False" WorkflowFileName="WhatsApp\WhatsAppOpenUserConversation.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CountryCode">[in_CountryCode]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_User_Tel_Number">[in_User_Tel_Number]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_StrThrowException">Could not load user conversation</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_StrSendMessageURL">["https://web.whatsapp.com/send?phone="+in_CountryCode+in_User_Tel_Number+"&amp;text="]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:InvokeWorkflowFile>
+    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke WhatsApp_ValidateUserAnswer workflow" sap:VirtualizedContainerService.HintSize="418,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="WhatsApp\WhatsApp_ValidateUserAnswer.xaml">
+      <ui:InvokeWorkflowFile.Arguments>
+        <InArgument x:TypeArguments="x:String" x:Key="in_CountryCode">[in_CountryCode]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_User_Tel_Number">[in_User_Tel_Number]</InArgument>
+        <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="in_DBConnection">[in_DBConnection]</InArgument>
+        <OutArgument x:TypeArguments="x:Boolean" x:Key="out_BooObtainedAnswer">[out_BooObtainedAnswer]</OutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_StrTimeMessageSent">[in_StrTimeMessageSent]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_StrCustomerId">[in_StrCustomerId]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_StrWhatsAppHeaderMessage">[in_StrWhatsAppHeaderMessage]</InArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_InsertWhatsAppMessageSPName">[InsertWhatsAppMessageSPName]</InArgument>
+      </ui:InvokeWorkflowFile.Arguments>
+    </ui:InvokeWorkflowFile>
+    <If Condition="[out_BooObtainedAnswer]" DisplayName="If - BooObtainedAnswer" sap:VirtualizedContainerService.HintSize="418,690" sap2010:WorkflowViewState.IdRef="If_1">
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,462" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence.Variables>
+            <Variable x:TypeArguments="x:String" Name="StrUserConversation" />
+          </Sequence.Variables>
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke Execute_SP_with_parameters workflow" sap:VirtualizedContainerService.HintSize="382,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_2" UnSafe="False" WorkflowFileName="SQL\Execute_SP_with_parameters-GetUserInfo.xaml">
+            <ui:InvokeWorkflowFile.Arguments>
+              <InArgument x:TypeArguments="x:String" x:Key="in_StrSPName">[in_GetUserMessagesSPName]</InArgument>
+              <InArgument x:TypeArguments="ui:DatabaseConnection" x:Key="DBConnection">[in_DBConnection]</InArgument>
+              <InArgument x:TypeArguments="x:String" x:Key="in_Customer_id">[in_StrCustomerId]</InArgument>
+              <OutArgument x:TypeArguments="sd:DataTable" x:Key="out_dtResponse">[out_dtUserConversation]</OutArgument>
+            </ui:InvokeWorkflowFile.Arguments>
+          </ui:InvokeWorkflowFile>
+          <ui:OutputDataTable DataTable="[out_dtUserConversation]" DisplayName="Output Data Table" sap:VirtualizedContainerService.HintSize="382,112" sap2010:WorkflowViewState.IdRef="OutputDataTable_1" Text="[StrUserConversation]" />
+          <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="382,113" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[StrUserConversation]" />
+        </Sequence>
+      </If.Then>
+      <If.Else>
+        <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,90" sap2010:WorkflowViewState.IdRef="Sequence_3">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+        </Sequence>
+      </If.Else>
+    </If>
+    <ui:LogMessage DisplayName="Log Message end" sap:VirtualizedContainerService.HintSize="418,164" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;Completed GetUserMessages workflow&quot;]" />
+  </Sequence>
+</Activity>
